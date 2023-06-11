@@ -1,20 +1,22 @@
 import { useRef, useReducer, FunctionComponent } from "react";
 import { initialState, reducer } from "./todo/reducer";
-import { Actions } from "./todo/actions";
+import constants from "./todo/constants";
 const Content: FunctionComponent = () => {
     const inputFocus = useRef<HTMLInputElement>(null);
     const [state, dispatch] = useReducer(reducer, initialState);
     const { todoInput, todos } = state;
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let value = e.target.value;
-        console.log(Actions.setTodoInput(value));
-        
-        dispatch(Actions.setTodoInput(value));
+        dispatch({type: constants.SET_TODO_INPUT, payload:value});
     }
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        dispatch({type: constants.SET_TODO_INPUT, payload:""});
+        dispatch({type: constants.SET_TODO_ADD, payload:state.todoInput});
+        inputFocus.current?.focus();
     }
     const handleDelete = (index: number) => {
+        dispatch({type: constants.SET_TODO_REMOVE, payload:index})
     }
     return (
         <div>
