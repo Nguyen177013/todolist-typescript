@@ -1,18 +1,21 @@
-import { useRef, useReducer, FunctionComponent } from "react";
-import { initialState, reducer } from "./todo/reducer";
+import { useRef, FunctionComponent } from "react";
 import constants from "./todo/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./todo/store";
 const Content: FunctionComponent = () => {
+    const dispatch = useDispatch();
+    const todos = useSelector((state : RootState) =>{state.todoList});
     const inputFocus = useRef<HTMLInputElement>(null);
-    const [state, dispatch] = useReducer(reducer, initialState);
-    const { todoInput, todos } = state;
+    // const [state, dispatch] = useReducer(reducer, initialState);
+    // const { todoInput, todos } = state;
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let value = e.target.value;
-        dispatch({type: constants.SET_TODO_INPUT, payload:value});
+        // dispatch({type: constants.SET_TODO_INPUT, payload:value});
     }
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        dispatch({type: constants.SET_TODO_INPUT, payload:""});
-        dispatch({type: constants.SET_TODO_ADD, payload:state.todoInput});
+        // dispatch({type: constants.SET_TODO_INPUT, payload:""});
+        // dispatch({type: constants.SET_TODO_ADD, payload:state.todoInput});
         inputFocus.current?.focus();
     }
     const handleDelete = (index: number) => {
@@ -22,7 +25,7 @@ const Content: FunctionComponent = () => {
         <div>
             <form action="" onSubmit={handleSubmit}>
                 <input type="text"
-                    value={todoInput}
+                    // value={todoInput}
                     onChange={handleChange}
                     placeholder="type todo stuff"
                     ref={inputFocus}
@@ -32,13 +35,13 @@ const Content: FunctionComponent = () => {
             <div>
                 <p>Todo list:</p>
                 <ul>
-                    {todos.map((todo, index) =>
+                    {/* {todos.map((todo, index) =>
                         <li
                             key={index}
                         >{todo}
                             <button onClick={() => handleDelete(index)}>Delete</button>
                         </li>
-                    )}
+                    )} */}
                 </ul>
             </div>
         </div>
