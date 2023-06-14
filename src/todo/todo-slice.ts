@@ -20,5 +20,5 @@ const todoSlice = createSlice({
     }
 })
 
-export const { addData, deleteData, setInut } = todoSlice.actions;
+export const todoAction = todoSlice.actions;
 export default todoSlice;
