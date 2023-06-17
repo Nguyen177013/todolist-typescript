@@ -1,8 +1,9 @@
 import { useRef, FunctionComponent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./todo/store";
-import { titleSchema, todoAction, todosSchema } from "./todo/todo-slice";
+import { todoAction} from "./todo/todo-slice";
 import { Checkbox } from "@mui/material";
+import { titleSchema } from "./interface/todoInterface";
 const Content: FunctionComponent = () => {
     const dispatch = useDispatch();
     const { todoInput, todos, pending } = useSelector((state: RootState) => state.todoList);

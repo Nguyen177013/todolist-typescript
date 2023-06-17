@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { MyObject, titleSchema } from "../interface/todoInterface";
 
 const initialState = {
     todoInput: "",
@@ -18,23 +19,7 @@ const initialState = {
     ],
     pending: null 
 };
-interface TodoItem {
-    title: string,
-    status: boolean
-}
-interface MyObject {
-    todoInput: string
-    pending: number | null;
-    todos: TodoItem[]
-}
-export interface titleSchema{
-    index:number,
-    title: string
-}
-export type todosSchema = {
-    title: string,
-    status: boolean
-}
+
 const todoSlice = createSlice({
     name: "todo",
     initialState: initialState,
@@ -56,8 +41,6 @@ const todoSlice = createSlice({
             state.pending = null;
         },
         changeTitle(state: MyObject , payload : PayloadAction<titleSchema>){
-            console.log(payload.payload.index);
-            
             state.todoInput = payload.payload.title;
             state.pending = payload.payload.index;
         },
